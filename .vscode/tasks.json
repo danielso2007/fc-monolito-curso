@@ -7,7 +7,7 @@
 			"group": "test",
 			"problemMatcher": [],
 			"label": "npm: test",
-			"detail": "npm run tsc -- --noEmit && jest"
+			"detail": "Executa os testes do projeto"
 		},
 		{
 			"type": "npm",
@@ -15,7 +15,26 @@
 			"group": "clean",
 			"problemMatcher": [],
 			"label": "npm: install",
-			"detail": "install dependencies from package"
+			"detail": "Isntalar dependências do projeto"
+		},
+		{
+			"type": "npm",
+			"script": "install",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: release",
+			"detail": "Cria uma nova versão do projeto"
+		},
+		{
+			"label": "Git: Enviar alterações com tags",
+			"type": "shell",
+			"command": "git push --follow-tags origin main",
+			"group": "none",
+			"presentation": {
+				"reveal": "always",
+				"panel": "new"
+			},
+			"problemMatcher": []
 		}
 	]
 }
