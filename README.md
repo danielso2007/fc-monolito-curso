@@ -1,3 +1,5 @@
+[![Node.js CI](https://github.com/danielso2007/fc-monolito-curso/actions/workflows/node.js.yml/badge.svg)](https://github.com/danielso2007/fc-monolito-curso/actions/workflows/node.js.yml)
+
 # Projeto de curso Sistemas Monolíticos
 
 Para estudo.
