@@ -1,5 +1,7 @@
 [![Node.js CI](https://github.com/danielso2007/fc-monolito-curso/actions/workflows/node.js.yml/badge.svg)](https://github.com/danielso2007/fc-monolito-curso/actions/workflows/node.js.yml)
 
+**Observação:** A pasta `node_modules` foi incluído, pois no ambiente de estudo do trabalho é bloqueado. Já o `.vscode`, está com as tasks para usar no vscode.
+
 # Projeto de curso Sistemas Monolíticos
 
 Para estudo.
