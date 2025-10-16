@@ -1,21 +1,22 @@
-import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
-import { ProductCreationAttributes, ProductProps } from "../domain/product.entity";
+import { Column, DataType, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { InferAttributes, InferCreationAttributes, CreationOptional } from "sequelize";
 
 @Table({
   tableName: "products",
   timestamps: false,
 })
-export default class ProductModel extends Model<ProductProps, ProductCreationAttributes> {
+export default class ProductModel extends Model<InferAttributes<ProductModel>, InferCreationAttributes<ProductModel>
+> {
   @PrimaryKey
-  @Column({ allowNull: false })
-  declare id: string;
+  @Column({ type: DataType.STRING, allowNull: false })
+  declare id: CreationOptional<string>;
 
-  @Column({ allowNull: false })
+  @Column({ type: DataType.STRING, allowNull: false })
   declare name: string;
 
-  @Column({ allowNull: false })
+  @Column({ type: DataType.STRING, allowNull: false })
   declare description: string;
 
-  @Column({ allowNull: false })
+  @Column({ type: DataType.DECIMAL(10, 2), allowNull: false })
   declare salesPrice: number;
 }

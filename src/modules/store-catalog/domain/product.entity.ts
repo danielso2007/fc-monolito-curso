@@ -1,7 +1,5 @@
 import AggregateRoot from "../../@shared/domain/entity/aggregate-root.interface";
 import BaseEntity from "../../@shared/domain/entity/base.entity";
-import Id from "../../@shared/domain/value-object/id.value-object";
-import { Optional } from 'sequelize';
 
 export interface ProductProps {
   id?: string;
@@ -10,7 +8,7 @@ export interface ProductProps {
   salesPrice: number;
 };
 
-export interface ProductCreationAttributes extends Optional<ProductProps, 'id'> {}
+export type ProductCreationAttributes = Omit<ProductProps, 'id'>;
 
 export default class Product extends BaseEntity implements AggregateRoot {
   private _name: string;
