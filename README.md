@@ -134,6 +134,10 @@ As camadas seguem as dependências da Clean Architecture:
 
 O módulo @shared fornece contratos e abstrações reutilizadas entre módulos.
 
+![alt text](plantUml/arquitetura-diagrama-altonivel.svg)
+
+# Diagrama de arquitetura
+
 ![alt text](plantUml/arquitetura-diagrama.svg)
 
 # 🚀 Visão Geral das Dependências do Projeto

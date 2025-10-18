@@ -1,0 +1,70 @@
+@startuml
+!theme toy
+
+allowmixing
+skinparam component {
+    BorderColor DarkSlateGray
+    BackgroundColor WhiteSmoke
+    ArrowColor DimGray
+    ArrowFontName DroidSansMono
+    ArrowFontSize 10
+    ArrowFontColor DimGray
+}
+skinparam package {
+    BorderColor DarkSlateGray
+}
+skinparam interface {
+    BorderColor DarkOrange
+    BackgroundColor LightYellow
+}
+
+title Visão de Alto Nível da Arquitetura Monolítica Modular
+caption Comunicação baseada em Facades entre Contextos (Clean Architecture)
+
+package "Aplicação Monolítica" {
+
+    ' 1. Shared Kernel (Contexto Base)
+    component "Shared Kernel\n(@shared)" as Shared #LightGray {
+        interface "Base Entities\n& UseCase Interfaces" as SharedInterfaces
+    }
+
+    ' 2. Módulos de Domínio (Bounded Contexts)
+    
+    component "Client-ADM\n(Gestão de Clientes)" as ClientAdm #Lavender {
+        interface "ClientAdmFacadeInterface" as ClientAdmFacade
+    }
+
+    component "Product-ADM\n(Gestão de Produtos e Estoque)" as ProductAdm #MintCream {
+        interface "ProductAdmFacadeInterface" as ProductAdmFacade
+    }
+
+    component "Store Catalog\n(Visualização de Produtos)" as StoreCatalog #LightYellow {
+        interface "StoreCatalogFacadeInterface" as StoreCatalogFacade
+    }
+
+    component "Payment\n(Processamento de Transações)" as Payment #LightCyan {
+        interface "PaymentFacadeInterface" as PaymentFacade
+    }
+
+    ' 3. Componente Orquestrador/Acesso
+    
+    component "Checkout/Order Module\n(Orquestrador Central de Vendas)" as OrderOrchestrator #LightCoral
+
+    ' --- RELAÇÕES DE ALTO NÍVEL ---
+
+    ' 1. Dependência Externa: Store Catalog precisa consultar o Product Adm
+    StoreCatalog --> ProductAdmFacade : Consulta Estoque e Detalhes
+    
+    ' 2. Fluxo Principal de Vendas (Orquestração de Facades)
+    OrderOrchestrator --> ClientAdmFacade : 1. Busca/Valida Cliente
+    OrderOrchestrator --> ProductAdmFacade : 2. Reserva Estoque
+    OrderOrchestrator --> PaymentFacade : 3. Processa Pagamento
+
+    ' 3. Todos os módulos dependem do Shared Kernel para entidades base
+    ClientAdm -[hidden]up-|> Shared
+    ProductAdm -[hidden]up-|> Shared
+    StoreCatalog -[hidden]up-|> Shared
+    Payment -[hidden]up-|> Shared
+}
+
+@enduml
