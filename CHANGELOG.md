@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/danielso2007/fc-monolito-curso/compare/v1.1.0...v1.2.0) (2025-10-18)
+
+
+### Features
+
+* Adicionado uma nova task no projeto. ([f588594](https://github.com/danielso2007/fc-monolito-curso/commit/f588594418687ea5cf340977492fa8e510f3c4c5))
+* Adicionando o diagrama de arquitetura do projeto. ([a1c4be0](https://github.com/danielso2007/fc-monolito-curso/commit/a1c4be09218372044bf7908f4e31de81eadd9c32))
+
 ## 1.1.0 (2025-10-14)
 
 
