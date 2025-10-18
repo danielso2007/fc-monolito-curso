@@ -1,0 +1,239 @@
+@startuml
+allowmixing 
+!include <archimate/Archimate>
+
+hide empty members
+skinparam defaultTextAlignment center
+
+' --- CORES BASE: FUNDO CLARO (BRANCO/PASTEL) ---
+skinparam component {
+    BorderColor DarkSlateGray
+    BackgroundColor WhiteSmoke 
+    ArrowColor DimGray
+    ArrowFontName DroidSansMono
+    ArrowFontSize 10
+    ArrowFontColor DimGray
+}
+
+' --- CORES PASTEIS PARA OS MÓDULOS (DOMÍNIOS) ---
+skinparam package {
+    BorderColor DarkSlateGray
+}
+skinparam rectangle {
+    BorderColor DarkSlateGray
+    BackgroundColor WhiteSmoke 
+}
+skinparam interface {
+    BorderColor DarkOrange
+    BackgroundColor LightYellow 
+}
+skinparam class {
+    BorderColor DarkMagenta
+    BackgroundColor LightPink 
+}
+
+
+title Arquitetura Monolítica Modular Detalhada (Clean Architecture + Entidades)
+caption Rastreamento das Entidades: Setas tracejadas indicam onde as entidades são usadas (casos de uso e repositórios).
+
+package "Aplicação" {
+
+    ' 1. Shared (Cinza muito claro) - Simplificado
+    package "Shared Kernel (@shared)" as Shared {
+        interface "AggregateRootInterface" as SharedAggregateRootInterface
+        class "BaseEntity" as SharedBaseEntity
+        class "IdValueObject" as SharedIdValueObject
+        interface "UseCaseInterface" as SharedUseCaseInterface
+    }
+
+
+    ' ===============================================
+    ' 2. Client-ADM (Lavanda Suave)
+    ' ===============================================
+    package "Módulo: Client-ADM" as ClientAdm {
+        
+        package "domain" as ClientAdmDomain {
+            class "client.entity.ts" as ClientAdmClientEntity
+            ClientAdmClientEntity .up.|> SharedBaseEntity
+        }
+        
+        package "repository (Infra)" as ClientAdmRepository {
+            class "client.model.ts" as ClientAdmClientModel
+            class "client.repository.ts" as ClientAdmClientRepository
+            ClientAdmClientRepository - ClientAdmClientModel
+        }
+        
+        package "usecase" as ClientAdmUseCases {
+            class "AddClientUseCase" as AddClientUseCase << AddClient.usecase.ts >>
+            class "FindClientUseCase" as FindClientUseCase << FindClient.usecase.ts >>
+
+            AddClientUseCase .up.|> SharedUseCaseInterface
+            FindClientUseCase .up.|> SharedUseCaseInterface
+            
+            AddClientUseCase --> ClientAdmRepository : persiste/busca
+            FindClientUseCase --> ClientAdmRepository : busca
+            
+            ' RASTREAMENTO DE ENTIDADE
+            ClientAdmClientEntity ..> AddClientUseCase : Criada
+            ClientAdmClientEntity ..> FindClientUseCase : Retornada
+            ClientAdmClientEntity ..> ClientAdmClientRepository : Persistida/Lida
+        }
+
+        rectangle "Gateway (Abstração)" as ClientAdmGateway {
+            interface "ClientGateway" as ClientAdmClientGateway
+            ClientAdmRepository .down.|> ClientAdmClientGateway : implementa
+        }
+        rectangle "Facade (Entrada)" as ClientAdmFacadeComp {
+            interface "ClientAdmFacadeInterface" as ClientAdmFacadeInterface
+            class "ClientAdmFacade" as ClientAdmFacadeImpl
+            
+            ClientAdmFacadeInterface <|-- ClientAdmFacadeImpl
+            ClientAdmFacadeImpl --> AddClientUseCase
+            ClientAdmFacadeImpl --> FindClientUseCase
+        }
+    }
+
+    ' ===============================================
+    ' 3. Product-ADM (Verde Menta Suave - Ajustado)
+    ' ===============================================
+    package "Módulo: Product-ADM" as ProductAdmn { 
+        
+        package "domain" as ProductAdmDomain {
+            class "product.entity.ts" as ProductAdmProductEntity
+        }
+        
+        package "repository (Infra)" as ProductAdmRepository {
+            class "product.model.ts" as ProductAdmProductModel
+            class "product.repository.ts" as ProductAdmProductRepository
+            ProductAdmProductRepository - ProductAdmProductModel
+        }
+        
+        package "usecase" as ProductAdmUseCases {
+            class "AddProductUseCase" as AddProductUseCaseAdm << AddProduct.usecase.ts >>
+            class "CheckStockUseCase" as CheckStockUseCaseAdm << CheckStock.usecase.ts >>
+
+            AddProductUseCaseAdm .up.|> SharedUseCaseInterface
+            CheckStockUseCaseAdm .up.|> SharedUseCaseInterface
+
+            AddProductUseCaseAdm --> ProductAdmRepository : persiste/busca
+            CheckStockUseCaseAdm --> ProductAdmRepository : busca
+            
+            ' RASTREAMENTO DE ENTIDADE
+            ProductAdmProductEntity ..> AddProductUseCaseAdm : Criada
+            ProductAdmProductEntity ..> CheckStockUseCaseAdm : Usada p/ estoque
+            ProductAdmProductEntity ..> ProductAdmProductRepository : Persistida/Lida
+        }
+
+        rectangle "Gateway (Abstração)" as ProductAdmGateway {
+            interface "ProductGateway" as ProductAdmProductGateway
+            ProductAdmRepository .down.|> ProductAdmProductGateway : implementa
+        }
+        rectangle "Facade (Entrada)" as ProductAdmFacadeComp {
+            interface "ProductAdmFacadeInterface" as ProductAdmFacadeInterface
+            class "ProductAdmFacade" as ProductAdmFacadeImpl
+
+            ProductAdmFacadeInterface <|-- ProductAdmFacadeImpl
+            ProductAdmFacadeImpl --> AddProductUseCaseAdm
+            ProductAdmFacadeImpl --> CheckStockUseCaseAdm
+        }
+    }
+    
+    ' ===============================================
+    ' 4. Store Catalog (Pêssego Suave)
+    ' ===============================================
+    package "Módulo: Store Catalog" as StoreCatalog {
+
+        package "domain" as StoreCatalogDomain {
+            class "product.entity.ts" as StoreCatalogProductEntity
+        }
+        
+        package "repository (Infra)" as StoreCatalogRepository {
+            class "product.model.ts" as StoreCatalogProductModel
+            class "product.repository.ts" as StoreCatalogProductRepository
+            StoreCatalogProductRepository - StoreCatalogProductModel
+        }
+        
+        package "usecase" as StoreCatalogUseCases {
+            class "FindAllProductsUseCase" as FindAllProductsUseCase << FindAll.usecase.ts >>
+            class "FindProductUseCase" as FindProductUseCaseSC << FindProd.usecase.ts >>
+
+            FindAllProductsUseCase .up.|> SharedUseCaseInterface
+            FindProductUseCaseSC .up.|> SharedUseCaseInterface
+
+            FindAllProductsUseCase --> StoreCatalogRepository : busca
+            FindProductUseCaseSC --> StoreCatalogRepository : busca
+            
+            ' RASTREAMENTO DE ENTIDADE
+            StoreCatalogProductEntity ..> FindAllProductsUseCase : Retornada
+            StoreCatalogProductEntity ..> FindProductUseCaseSC : Retornada
+            StoreCatalogProductEntity ..> StoreCatalogProductRepository : Lida
+        }
+
+        rectangle "Gateway (Abstração)" as StoreCatalogGateway {
+            interface "ProductGateway" as StoreCatalogProductGateway
+            StoreCatalogRepository .down.|> StoreCatalogProductGateway : implementa
+        }
+        rectangle "Facade (Entrada)" as StoreCatalogFacadeComp {
+            interface "StoreCatalogFacadeInterface" as StoreCatalogFacadeInterface
+            class "StoreCatalogFacade" as StoreCatalogFacadeImpl
+
+            StoreCatalogFacadeInterface <|-- StoreCatalogFacadeImpl
+            StoreCatalogFacadeImpl --> FindAllProductsUseCase
+            StoreCatalogFacadeImpl --> FindProductUseCaseSC
+        }
+    }
+
+    ' ===============================================
+    ' 5. Payment (Azul Claro Suave)
+    ' ===============================================
+    package "Módulo: Payment" as Payment {
+        
+        package "domain" as PaymentDomain {
+            class "transaction.ts" as PaymentTransaction
+        }
+        
+        package "repository (Infra)" as PaymentRepository {
+            class "transaction.model.ts" as PaymentTransactionModel
+            class "transaction.repository.ts" as PaymentTransactionRepository
+            PaymentTransactionRepository - PaymentTransactionModel
+        }
+        
+        package "usecase" as PaymentUseCases {
+            class "ProcessPaymentUseCase" as ProcessPaymentUseCase << ProcessPay.usecase.ts >>
+            ProcessPaymentUseCase .up.|> SharedUseCaseInterface
+            ProcessPaymentUseCase --> PaymentRepository : persiste/busca
+            
+            ' RASTREAMENTO DE ENTIDADE
+            PaymentTransaction ..> ProcessPaymentUseCase : Criada/Atualizada
+            PaymentTransaction ..> PaymentTransactionRepository : Persistida/Lida
+        }
+
+        rectangle "Gateway (Abstração)" as PaymentGateway {
+            interface "PaymentGateway" as PaymentPaymentGateway
+            PaymentRepository .down.|> PaymentPaymentGateway : implementa
+        }
+        rectangle "Facade (Entrada)" as PaymentFacadeComp {
+            interface "PaymentFacadeInterface" as PaymentFacadeInterface
+            class "PaymentFacade" as PaymentFacadeImpl
+            
+            PaymentFacadeInterface <|-- PaymentFacadeImpl
+            PaymentFacadeImpl --> ProcessPaymentUseCase
+        }
+    }
+
+
+    ' ====================================================================================
+    ' --- INTEGRAÇÕES CRUCIAIS ENTRE MÓDULOS (Via Facades) ---
+    ' ====================================================================================
+
+    ' Store Catalog precisa do Product Adm (para checar estoque/detalhes)
+    StoreCatalogProductGateway .right.> ProductAdmFacadeInterface : Usa para consultar \n(Injeção de Dependência)
+
+    ' Módulo Orquestrador (apenas para ilustrar o consumo)
+    component "Checkout/Order Module \n(Orquestrador, Não Mapeado)" as OrderOrchestrator #LightCoral
+    
+    OrderOrchestrator --> ClientAdmFacadeInterface : 1. Busca/valida Cliente
+    OrderOrchestrator --> ProductAdmFacadeInterface : 2. Reserva Estoque
+    OrderOrchestrator --> PaymentFacadeInterface : 3. Processa Pagamento
+}
+@enduml

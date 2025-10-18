@@ -6,6 +6,135 @@
 
 Para estudo.
 
+# Estrutura do projeto
+
+Obs.: Para gerar essa saĩda, foi usado o comando: `tree -I "node_modules|dist|.git"`
+
+```shell
+├── CHANGELOG.md
+├── jest.config.ts
+├── package.json
+├── package-lock.json
+├── README.md
+├── src
+│   └── modules
+│       ├── client-adm
+│       │   ├── domain
+│       │   │   └── client.entity.ts
+│       │   ├── facade
+│       │   │   ├── client-adm.facade.interface.ts
+│       │   │   ├── client-adm.facade.spec.ts
+│       │   │   └── client-adm.facade.ts
+│       │   ├── factory
+│       │   │   └── client-adm.facade.factory.ts
+│       │   ├── gateway
+│       │   │   └── client.gateway.ts
+│       │   ├── repository
+│       │   │   ├── client.model.ts
+│       │   │   ├── client.repository.spec.ts
+│       │   │   └── client.repository.ts
+│       │   └── usecase
+│       │       ├── add-client
+│       │       │   ├── add-client.usecase.dto.ts
+│       │       │   ├── add-client.usecase.spec.ts
+│       │       │   └── add-client.usecase.ts
+│       │       └── find-client
+│       │           ├── find-client.usecase.dto.ts
+│       │           ├── find-client.usecase.spec.ts
+│       │           └── find-client.usecase.ts
+│       ├── payment
+│       │   ├── domain
+│       │   │   └── transaction.ts
+│       │   ├── facade
+│       │   │   ├── facade.interface.ts
+│       │   │   ├── payment.facade.spec.ts
+│       │   │   └── payment.facade.ts
+│       │   ├── factory
+│       │   │   └── payment.facade.factory.ts
+│       │   ├── gateway
+│       │   │   └── payment.gateway.ts
+│       │   ├── repository
+│       │   │   ├── transaction.model.ts
+│       │   │   ├── transaction.repository.spec.ts
+│       │   │   └── transaction.repository.ts
+│       │   └── usecase
+│       │       └── process-payment
+│       │           ├── process-payment.dto.ts
+│       │           ├── process-payment.usecase.spec.ts
+│       │           └── process-payment.usecase.ts
+│       ├── product-adm
+│       │   ├── domain
+│       │   │   └── product.entity.ts
+│       │   ├── facade
+│       │   │   ├── product-adm.facade.interface.ts
+│       │   │   ├── product-adm.facade.spec.ts
+│       │   │   └── product-adm.facade.ts
+│       │   ├── factory
+│       │   │   └── facade.factory.ts
+│       │   ├── gateway
+│       │   │   └── product.gateway.ts
+│       │   ├── repository
+│       │   │   ├── product.model.ts
+│       │   │   ├── product.repository.spec.ts
+│       │   │   └── product.repository.ts
+│       │   └── usecase
+│       │       ├── add-product
+│       │       │   ├── add-product.dto.ts
+│       │       │   ├── add-product.usecase.spec.ts
+│       │       │   └── add-product.usecase.ts
+│       │       └── check-stock
+│       │           ├── check-stock.dto.ts
+│       │           ├── check-stock.usecase.spec.ts
+│       │           └── check-stock.usecase.ts
+│       ├── @shared
+│       │   ├── domain
+│       │   │   ├── entity
+│       │   │   │   ├── aggregate-root.interface.ts
+│       │   │   │   └── base.entity.ts
+│       │   │   └── value-object
+│       │   │       ├── address.ts
+│       │   │       ├── id.value-object.ts
+│       │   │       └── value-object.interface.ts
+│       │   └── usecase
+│       │       └── use-case.interface.ts
+│       └── store-catalog
+│           ├── domain
+│           │   └── product.entity.ts
+│           ├── facade
+│           │   ├── store-catalog.facade.interface.ts
+│           │   ├── store-catalog.facade.spec.ts
+│           │   └── store-catalog.facade.ts
+│           ├── factory
+│           │   └── facade.factory.ts
+│           ├── gateway
+│           │   └── product.gateway.ts
+│           ├── repository
+│           │   ├── product.model.ts
+│           │   ├── product.repository.spec.ts
+│           │   └── product.repository.ts
+│           └── usecase
+│               ├── find-all-products
+│               │   ├── find-all-products.dto.ts
+│               │   ├── find-all-products.usecase.spec.ts
+│               │   └── find-all-products.usecase.ts
+│               └── find-product
+│                   ├── find-product.dto.ts
+│                   ├── find-product.usecase.spec.ts
+│                   └── find-product.usecase.ts
+├── tsconfig.json
+└── tslint.json
+```
+
+As camadas seguem as dependências da Clean Architecture:
+- domain → entidades e value objects (não dependem de nada externo).
+- usecase → regras de negócio, depende apenas de interfaces (gateway, repository).
+- repository e gateway → implementações externas (ex: persistência, APIs).
+- facade → ponto de entrada do módulo, orquestra os casos de uso.
+- factory → cria instâncias concretas da fachada com dependências injetadas.
+
+O módulo @shared fornece contratos e abstrações reutilizadas entre módulos.
+
+![alt text](plantUml/arquitetura-diagrama.svg)
 
 # 🚀 Visão Geral das Dependências do Projeto
 
