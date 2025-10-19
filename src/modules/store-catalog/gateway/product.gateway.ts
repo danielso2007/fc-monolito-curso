@@ -1,6 +1,6 @@
-import Product from '../domain/product.entity';
+import ProductStoreModel from '../repository/product.store.model';
 
 export default interface ProductGateway {
-  findAll(): Promise<Product[]>;
-  find(id: string): Promise<Product>;
+  findAll(): Promise<ProductStoreModel[]>;
+  find(id: string): Promise<ProductStoreModel>;
 };

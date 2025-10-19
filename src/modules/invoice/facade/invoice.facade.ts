@@ -1,4 +1,4 @@
-import UseCaseInterface from 'modules/@shared/usecase/use-case.interface';
+import UseCaseInterface from '@/modules/@shared/usecase/use-case.interface';
 import InvoiceFacadeInterface, { FindInvoiceInputDTO, FindInvoiceOutputDTO, GenerateInvoiceInputDto, GenerateInvoiceOutputDto } from './invoice.interface';
 
 export interface UseCaseProps {

@@ -1,12 +1,9 @@
 import Transaction from '../domain/transaction';
 import PaymentGateway from '../gateway/payment.gateway';
-import { sequelize } from '../infrastructure/db';
 import TransactionModel from './transaction.model';
 
 export default class TransactionRepostiory implements PaymentGateway {
   async save(input: Transaction): Promise<Transaction> {
-    await sequelize.sync();
-
     await TransactionModel.create({
       id: input.id,
       orderId: input.orderId,

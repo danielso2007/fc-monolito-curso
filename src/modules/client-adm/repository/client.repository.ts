@@ -1,15 +1,11 @@
 import Address from '../../@shared/domain/value-object/address';
 import Client from '../domain/client.entity';
 import ClientGateway from '../gateway/client.gateway';
-import { sequelize } from '../infrastructure/db';
 import { ClientModel } from './client.model';
 
 export default class ClientRepository implements ClientGateway {
 
   async add(entity: Client): Promise<void> {
-
-    await sequelize.sync();
-
     await ClientModel.create({
       id: entity.id,
       name: entity.name,
@@ -27,9 +23,6 @@ export default class ClientRepository implements ClientGateway {
   }
 
   async find(id: string): Promise<Client> {
-
-    await sequelize.sync();
-
     const client = await ClientModel.findOne({ where: { id } });
 
     if (!client) {
@@ -52,5 +45,26 @@ export default class ClientRepository implements ClientGateway {
       createdAt: client.createdAt,
       updatedAt: client.createdAt
     });
+  }
+
+  async findAll(): Promise<Client[]> {
+    const clientList = await ClientModel.findAll();
+
+    return clientList.map((client) => new Client({
+      id: client.id,
+      name: client.name,
+      email: client.email,
+      document: client.document,
+      address: new Address(
+        client.street,
+        client.number,
+        client.complement,
+        client.city,
+        client.state,
+        client.zipcode,
+      ),
+      createdAt: client.createdAt,
+      updatedAt: client.createdAt
+    }));
   }
 }

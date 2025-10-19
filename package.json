@@ -6,9 +6,9 @@
   "scripts": {
     "test": "npm run tsc -- --noEmit && jest",
     "tsc": "tsc",
-    "build": "tsc && tsc-alias",
+    "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "ts-node src/server.ts",
+    "dev": "nodemon",
     "release": "standard-version",
     "lint": "eslint 'src/**/*.ts' --ext .ts --no-ignore",
     "lint:fix": "eslint 'src/**/*.ts' --ext .ts --no-ignore --fix"
@@ -46,18 +46,20 @@
     "eslint-plugin-import": "^2.32.0",
     "globals": "^16.4.0",
     "jest": "^30.2.0",
+    "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
     "standard-version": "^9.5.0",
     "supertest": "^7.1.4",
     "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jstoxml": "^7.0.1",
-    "nodemon": "^3.1.10",
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.7",
     "sequelize-typescript": "^2.1.6",

@@ -1,6 +1,6 @@
-import ClientRepository from 'modules/client-adm/repository/client.repository';
 import Address from '../../../@shared/domain/value-object/address';
 import Client from '../../domain/client.entity';
+import ClientRepository from '../../repository/client.repository';
 import FindClientUseCase from './find-client.usecase';
 
 const client = new Client({
@@ -19,9 +19,9 @@ const client = new Client({
 });
 
 const MockRepository = (): ClientRepository => {
-
   return {
     add: jest.fn(),
+    findAll: jest.fn(),
     find: jest.fn().mockReturnValue(Promise.resolve(client))
   };
 };

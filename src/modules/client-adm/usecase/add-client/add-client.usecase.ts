@@ -1,9 +1,10 @@
+import UseCaseInterface from '@/modules/@shared/usecase/use-case.interface';
 import Address from '../../../@shared/domain/value-object/address';
 import Client from '../../domain/client.entity';
 import ClientGateway from '../../gateway/client.gateway';
 import { AddClientInputDto, AddClientOutputDto } from './add-client.usecase.dto';
 
-export default class AddClientUseCase {
+export default class AddClientUseCase implements UseCaseInterface {
 
   private _clientRepository: ClientGateway;
 

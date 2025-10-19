@@ -1,5 +1,5 @@
-import ProductRepository from 'modules/product-adm/repository/product.repository';
 import Product from '../../domain/product.entity';
+import ProductRepository from '../../repository/product.repository';
 import CheckStockUseCase from './check-stock.usecase';
 
 const product = new Product({

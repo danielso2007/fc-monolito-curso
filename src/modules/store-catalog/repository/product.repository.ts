@@ -1,17 +1,13 @@
-import Product from '../domain/product.entity';
 import ProductGateway from '../gateway/product.gateway';
-import { sequelize } from '../infrastructure/db';
-import ProductModel from './product.model';
+import ProductStoreModel from './product.store.model';
 
 export default class ProductRepository implements ProductGateway {
-  async findAll(): Promise<Product[]> {
-    await sequelize.sync();
-
-    const products = await ProductModel.findAll();
+  async findAll(): Promise<ProductStoreModel[]> {
+    const products = await ProductStoreModel.findAll();
 
     return products.map(
       (product) =>
-        new Product({
+        new ProductStoreModel({
           id: product.id,
           name: product.name,
           description: product.description,
@@ -19,16 +15,14 @@ export default class ProductRepository implements ProductGateway {
         })
     );
   }
-  async find(id: string): Promise<Product> {
-    await sequelize.sync();
-
-    const product = await ProductModel.findOne({
+  async find(id: string): Promise<ProductStoreModel> {
+    const product = await ProductStoreModel.findOne({
       where: {
         id: id,
       },
     });
 
-    return new Product({
+    return new ProductStoreModel({
       id: product.id,
       name: product.name,
       description: product.description,

@@ -1,5 +1,5 @@
-import InvoiceRepostiory from 'modules/invoice/repository/invoice.repository';
 import Address from '../../../@shared/domain/value-object/address';
+import InvoiceRepostiory from '../../repository/invoice.repository';
 import AddInvoiceUseCase from './find-invoice.usecase';
 
 const MockRepository = (): InvoiceRepostiory => {

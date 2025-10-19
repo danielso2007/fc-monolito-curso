@@ -4,12 +4,9 @@ import InvoiceModel from './invoice.model';
 import InvoiceItems from '../domain/invoice.itens.entity';
 import InvoiceItemModel from './invoice.itens.model';
 import Address from '../../@shared/domain/value-object/address';
-import { sequelize } from '../infrastructure/db';
 
 export default class InvoiceRepostiory implements InvoiceGateway {
   async find(id: string): Promise<Invoice> {
-    await sequelize.sync();
-
     const invoice = await InvoiceModel.findOne({
       where: {
         id: id
@@ -37,8 +34,6 @@ export default class InvoiceRepostiory implements InvoiceGateway {
   }
 
   async findItens(id: string): Promise<InvoiceItems[]> {
-    await sequelize.sync();
-
     const invoiceItens = await InvoiceItemModel.findAll({
       where: { invoiceId: id },
     });
@@ -57,8 +52,6 @@ export default class InvoiceRepostiory implements InvoiceGateway {
   }
 
   async save(input: Invoice): Promise<Invoice> {
-    await sequelize.sync();
-
     await InvoiceModel.create({
       id: input.id,
       name: input.name,
