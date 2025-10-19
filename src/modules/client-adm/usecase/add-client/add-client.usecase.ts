@@ -1,4 +1,4 @@
-import UseCaseInterface from '@/modules/@shared/usecase/use-case.interface';
+import UseCaseInterface from '../../../@shared/usecase/use-case.interface';
 import Address from '../../../@shared/domain/value-object/address';
 import Client from '../../domain/client.entity';
 import ClientGateway from '../../gateway/client.gateway';

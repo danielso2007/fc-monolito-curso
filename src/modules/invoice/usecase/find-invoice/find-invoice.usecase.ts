@@ -1,4 +1,4 @@
-import UseCaseInterface from "@/modules/@shared/usecase/use-case.interface";
+import UseCaseInterface from "../../../@shared/usecase/use-case.interface";
 import InvoiceGateway from "../../gateway/invoice.gateway";
 import { FindInvoiceUseCaseInputDTO, FindInvoiceUseCaseOutputDTO } from "./find-invoice.usecase.dto";
 

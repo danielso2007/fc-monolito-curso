@@ -94,4 +94,44 @@ export default class InvoiceRepostiory implements InvoiceGateway {
       updatedAt: input.updatedAt
     });
   }
+
+  async findAll(): Promise<Invoice[]> {
+    const list = await InvoiceModel.findAll();
+    const invoices: Invoice[] = [];
+
+    for (const value of list) {
+      const items = await this.findItens(value.id);
+
+      const itemsList = items.map((item) =>
+        new InvoiceItems({
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt,
+        })
+      );
+
+      invoices.push(
+        new Invoice({
+          id: value.id,
+          name: value.name,
+          document: value.document,
+          address: new Address(
+            value.street,
+            value.number,
+            value.complement,
+            value.city,
+            value.state,
+            value.zipcode
+          ),
+          items: itemsList,
+          createdAt: value.createdAt,
+          updatedAt: value.updatedAt,
+        })
+      );
+    }
+
+    return invoices;
+  }
 }

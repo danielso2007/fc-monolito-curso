@@ -6,7 +6,8 @@ const MockRepository = (): InvoiceRepostiory => {
   return {
     find: jest.fn(),
     findItens: jest.fn(),
-    save: jest.fn()
+    save: jest.fn(),
+    findAll: jest.fn()
   };
 };
 

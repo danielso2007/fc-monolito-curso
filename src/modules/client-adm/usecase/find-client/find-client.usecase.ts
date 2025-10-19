@@ -1,5 +1,5 @@
 
-import UseCaseInterface from '@/modules/@shared/usecase/use-case.interface';
+import UseCaseInterface from '../../../@shared/usecase/use-case.interface';
 import Address from '../../../@shared/domain/value-object/address';
 import ClientGateway from '../../gateway/client.gateway';
 import { FindClientUseCaseInputDto, FindClientUseCaseOutputDto } from './find-client.usecase.dto';

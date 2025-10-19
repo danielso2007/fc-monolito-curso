@@ -8,69 +8,112 @@
 	},
 	"item": [
 		{
-			"name": "Add Clients",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao.silva@example.com\",\n  \"document\": \"123.456.789-00\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"complement\": \"Apto 45\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01234-567\"\n  }\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Add Clients",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao.silva@example.com\",\n  \"document\": \"123.456.789-00\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"complement\": \"Apto 45\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01234-567\"\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clients"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:3000/clients",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"clients"
-					]
+				{
+					"name": "Find All Clients",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/clients/08ac4df2-4e6d-4bc5-bbc8-61d3e04b49bf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clients",
+								"08ac4df2-4e6d-4bc5-bbc8-61d3e04b49bf"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Find All Clients",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"id\": \"1\",\n  \"name\": \"João Silva\",\n  \"email\": \"joao.silva@example.com\",\n  \"document\": \"123.456.789-00\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"complement\": \"Apto 45\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01234-567\"\n  }\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "Find All Invoices",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/invoices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"invoices"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:3000/clients",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"clients"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	],
 	"variable": [
