@@ -20,4 +20,4 @@ export default interface ProductAdmFacadeInterface {
   checkStock(
     input: CheckStockFacadeInputDto
   ): Promise<CheckStockFacadeOutputDto>;
-}
+};

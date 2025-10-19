@@ -1,16 +1,15 @@
-import { Sequelize } from "sequelize-typescript";
-import Id from "../../@shared/domain/value-object/id.value-object";
-import Transaction from "../domain/transaction";
-import TransactionModel from "./transaction.model";
-import TransactionRepostiory from "./transaction.repository";
+import { Sequelize } from 'sequelize-typescript';
+import Transaction from '../domain/transaction';
+import TransactionModel from './transaction.model';
+import TransactionRepostiory from './transaction.repository';
 
-describe("TransactionRepository test", () => {
+describe('TransactionRepository test', () => {
   let sequelize: Sequelize;
 
   beforeEach(async () => {
     sequelize = new Sequelize({
-      dialect: "sqlite",
-      storage: ":memory:",
+      dialect: 'sqlite',
+      storage: ':memory:',
       logging: false,
       sync: { force: true },
     });
@@ -23,11 +22,11 @@ describe("TransactionRepository test", () => {
     await sequelize.close();
   });
 
-  it("should save a transaction", async () => {
+  it('should save a transaction', async () => {
     const transaction = new Transaction({
-      id: "1",
+      id: '1',
       amount: 100,
-      orderId: "1",
+      orderId: '1',
     });
     transaction.approve();
 
@@ -35,7 +34,7 @@ describe("TransactionRepository test", () => {
     const result = await repository.save(transaction);
 
     expect(result.id).toBe(transaction.id);
-    expect(result.status).toBe("approved");
+    expect(result.status).toBe('approved');
     expect(result.amount).toBe(transaction.amount);
     expect(result.orderId).toBe(transaction.orderId);
   });

@@ -1,8 +1,8 @@
-import ProductGateway from "../../gateway/product.gateway";
-import { FindProductInputDto, FindProductOutputDto } from "./find-product.dto";
+import ProductGateway from 'modules/store-catalog/gateway/product.gateway';
+import { FindProductInputDto, FindProductOutputDto } from './find-product.dto';
 
 export default class FindProductUseCase {
-  constructor(private readonly productRepository: ProductGateway) {}
+  constructor(private readonly productRepository: ProductGateway) { }
 
   async execute(input: FindProductInputDto): Promise<FindProductOutputDto> {
     const product = await this.productRepository.find(input.id);

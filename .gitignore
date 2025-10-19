@@ -1,3 +1,4 @@
 .swc
 dist
 out/plantUml
+node_modules/

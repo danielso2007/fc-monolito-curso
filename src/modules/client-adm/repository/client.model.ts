@@ -1,4 +1,4 @@
-import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
 @Table({
   tableName: 'client',
@@ -7,38 +7,38 @@ import { Column, Model, PrimaryKey, Table } from "sequelize-typescript";
 export class ClientModel extends Model {
   @PrimaryKey
   @Column({ allowNull: false })
-  declare id: string
+  declare id: string;
 
   @Column({ allowNull: false })
-  declare name: string
+  declare name: string;
 
   @Column({ allowNull: false })
-  declare email: string
+  declare email: string;
 
   @Column({ allowNull: false })
-  declare document: string
+  declare document: string;
 
   @Column({ allowNull: false })
-  declare street: string
+  declare street: string;
 
   @Column({ allowNull: false })
-  declare number: string
+  declare number: string;
 
   @Column({ allowNull: true })
-  declare complement: string
+  declare complement: string;
 
   @Column({ allowNull: false })
-  declare city: string
+  declare city: string;
 
   @Column({ allowNull: false })
-  declare state: string
+  declare state: string;
 
   @Column({ allowNull: false })
-  declare zipcode: string
+  declare zipcode: string;
 
   @Column({ allowNull: false })
-  declare createdAt: Date
+  declare createdAt: Date;
 
   @Column({ allowNull: false })
-  declare updatedAt: Date
+  declare updatedAt: Date;
 }

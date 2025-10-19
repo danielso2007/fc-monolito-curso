@@ -1,8 +1,8 @@
-import { Column, DataType, Model, PrimaryKey, Table } from "sequelize-typescript";
-import { InferAttributes, InferCreationAttributes, CreationOptional } from "sequelize";
+import { Column, DataType, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import { InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 
 @Table({
-  tableName: "products",
+  tableName: 'products',
   timestamps: false,
 })
 export default class ProductModel extends Model<InferAttributes<ProductModel>, InferCreationAttributes<ProductModel>

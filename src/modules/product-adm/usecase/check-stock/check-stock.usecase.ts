@@ -1,5 +1,5 @@
-import ProductGateway from "../../gateway/product.gateway";
-import { CheckStockInputDto, CheckStockOutputDto } from "./check-stock.dto";
+import ProductGateway from '../../gateway/product.gateway';
+import { CheckStockInputDto, CheckStockOutputDto } from './check-stock.dto';
 
 export default class CheckStockUseCase {
   private _productRepository: ProductGateway;

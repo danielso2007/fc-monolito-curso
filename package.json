@@ -6,7 +6,9 @@
   "scripts": {
     "test": "npm run tsc -- --noEmit && jest",
     "tsc": "tsc",
-    "release": "standard-version"
+    "release": "standard-version",
+    "lint": "eslint 'src/**/*.ts' --ext .ts --no-ignore",
+    "lint:fix": "eslint 'src/**/*.ts' --ext .ts --no-ignore --fix"
   },
   "keywords": [
     "node",
@@ -22,6 +24,7 @@
     "node": ">=20.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.38.0",
     "@swc/cli": "^0.7.8",
     "@swc/core": "^1.13.5",
     "@swc/jest": "^0.2.39",
@@ -31,7 +34,15 @@
     "@types/supertest": "^6.0.3",
     "@types/uuid": "^11.0.0",
     "@types/validator": "^13.15.3",
+    "@typescript-eslint/eslint-plugin": "^8.46.1",
+    "@typescript-eslint/parser": "^8.46.1",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import": "^2.32.0",
+    "globals": "^16.4.0",
     "jest": "^30.2.0",
+    "prettier": "^3.6.2",
     "standard-version": "^9.5.0",
     "supertest": "^7.1.4",
     "ts-node": "^10.9.2",

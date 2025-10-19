@@ -23,4 +23,4 @@ export default interface StoreCatalogFacadeInterface {
     id: FindStoreCatalogFacadeInputDto
   ): Promise<FindStoreCatalogFacadeOutputDto>;
   findAll(): Promise<FindAllStoreCatalogFacadeOutputDto>;
-}
+};

@@ -14,4 +14,4 @@ export interface PaymentFacadeOutputDto {
 
 export default interface PaymentFacadeInterface {
   process(input: PaymentFacadeInputDto): Promise<PaymentFacadeOutputDto>;
-}
+};

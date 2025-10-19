@@ -1,5 +1,5 @@
-import AggregateRoot from "../../@shared/domain/entity/aggregate-root.interface";
-import BaseEntity from "../../@shared/domain/entity/base.entity";
+import AggregateRoot from '../../@shared/domain/entity/aggregate-root.interface';
+import BaseEntity from '../../@shared/domain/entity/base.entity';
 
 export interface ProductProps {
   id?: string;

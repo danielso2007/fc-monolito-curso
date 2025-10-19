@@ -1,0 +1,35 @@
+import AggregateRoot from '../../@shared/domain/entity/aggregate-root.interface';
+import BaseEntity from '../../@shared/domain/entity/base.entity';
+
+type InvoiceItemsProps = {
+  id?: string;
+  name: string;
+  price: number;
+};
+
+export default class InvoiceItems extends BaseEntity implements AggregateRoot {
+  private _name: string;
+  private _price: number;
+
+  constructor(props: InvoiceItemsProps) {
+    super(props.id);
+    this._name = props.name;
+    this._price = props.price;
+  }
+
+  get name(): string {
+    return this._name;
+  }
+
+  get price(): number {
+    return this._price;
+  }
+
+  set name(name: string) {
+    this._name = name;
+  }
+
+  set price(price: number) {
+    this._price = price;
+  }
+}
