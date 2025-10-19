@@ -36,6 +36,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x, 22.x]
+    needs: Lint
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
