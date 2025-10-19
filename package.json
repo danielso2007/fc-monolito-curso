@@ -28,6 +28,7 @@
     "@swc/cli": "^0.7.8",
     "@swc/core": "^1.13.5",
     "@swc/jest": "^0.2.39",
+    "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/jstoxml": "^5.0.0",
     "@types/node": "^24.7.2",
@@ -45,11 +46,11 @@
     "prettier": "^3.6.2",
     "standard-version": "^9.5.0",
     "supertest": "^7.1.4",
+    "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@types/express": "^5.0.3",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jstoxml": "^7.0.1",
