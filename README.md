@@ -1,4 +1,11 @@
 [![Node.js CI](https://github.com/danielso2007/fc-monolito-curso/actions/workflows/node.js.yml/badge.svg)](https://github.com/danielso2007/fc-monolito-curso/actions/workflows/node.js.yml)
+![GitHub package version](https://img.shields.io/github/package-json/v/danielso2007/fc-monolito-curso.svg)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/danielso2007/fc-monolito-curso.svg)](https://github.com/danielso2007/fc-monolito-curso/pulls)
+[![GitHub issues](https://img.shields.io/github/issues/danielso2007/fc-monolito-curso.svg)](https://github.com/danielso2007/fc-monolito-curso/issues?q=is%3Aopen+is%3Aissue)
+![GitHub last commit](https://img.shields.io/github/last-commit/danielso2007/fc-monolito-curso.svg)
+![GitHub contributors](https://img.shields.io/github/contributors/danielso2007/fc-monolito-curso.svg)
+![GitHub top language](https://img.shields.io/github/languages/top/danielso2007/fc-monolito-curso.svg)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 **Observação:** A pasta `node_modules` foi incluído, pois no ambiente de estudo do trabalho é bloqueado. Já o `.vscode`, está com as tasks para usar no vscode.
 
