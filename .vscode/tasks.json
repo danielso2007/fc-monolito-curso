@@ -15,15 +15,50 @@
 			"group": "clean",
 			"problemMatcher": [],
 			"label": "npm: install",
-			"detail": "Isntalar dependências do projeto"
+			"detail": "Instalar dependências do projeto"
 		},
 		{
-			"type": "npm",
-			"script": "install",
+			"label": "Rodar Testes",
+			"type": "shell",
+			"command": "npm run test",
 			"group": "build",
-			"problemMatcher": [],
+			"problemMatcher": [
+				"$tsc",
+				"$eslint-stylish"
+			]
+		},
+		{
+			"label": "npm: tsc",
+			"type": "shell",
+			"command": "npm run tsc",
+			"group": "build",
+			"problemMatcher": [
+				"$tsc"
+			]
+		},
+		{
 			"label": "npm: release",
-			"detail": "Cria uma nova versão do projeto"
+			"type": "shell",
+			"command": "npm run release",
+			"group": "none"
+		},
+		{
+			"label": "npm: lint",
+			"type": "shell",
+			"command": "npm run lint",
+			"group": "none",
+			"problemMatcher": [
+				"$eslint-stylish"
+			]
+		},
+		{
+			"label": "npm: lint:fix",
+			"type": "shell",
+			"command": "npm run lint:fix",
+			"group": "none",
+			"problemMatcher": [
+				"$eslint-stylish"
+			]
 		},
 		{
 			"label": "Git: Enviar alterações com tags",
