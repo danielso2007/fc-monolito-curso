@@ -18,6 +18,7 @@ skinparam component {
 ' --- CORES PASTEIS PARA OS MÓDULOS (DOMÍNIOS) ---
 skinparam package {
     BorderColor DarkSlateGray
+    BackgroundColor WhiteSmoke ' Para pacotes internos
 }
 skinparam rectangle {
     BorderColor DarkSlateGray
@@ -39,7 +40,7 @@ caption Rastreamento das Entidades: Setas tracejadas indicam onde as entidades s
 package "Aplicação" {
 
     ' 1. Shared (Cinza muito claro) - Simplificado
-    package "Shared Kernel (@shared)" as Shared {
+    package "Shared Kernel (@shared)" as Shared #LightGray {
         interface "AggregateRootInterface" as SharedAggregateRootInterface
         class "BaseEntity" as SharedBaseEntity
         class "IdValueObject" as SharedIdValueObject
@@ -50,7 +51,7 @@ package "Aplicação" {
     ' ===============================================
     ' 2. Client-ADM (Lavanda Suave)
     ' ===============================================
-    package "Módulo: Client-ADM" as ClientAdm {
+    package "Módulo: Client-ADM" as ClientAdm #Lavender {
         
         package "domain" as ClientAdmDomain {
             class "client.entity.ts" as ClientAdmClientEntity
@@ -94,9 +95,9 @@ package "Aplicação" {
     }
 
     ' ===============================================
-    ' 3. Product-ADM (Verde Menta Suave - Ajustado)
+    ' 3. Product-ADM (Verde Menta Suave)
     ' ===============================================
-    package "Módulo: Product-ADM" as ProductAdmn { 
+    package "Módulo: Product-ADM" as ProductAdm #MintCream { 
         
         package "domain" as ProductAdmDomain {
             class "product.entity.ts" as ProductAdmProductEntity
@@ -141,7 +142,7 @@ package "Aplicação" {
     ' ===============================================
     ' 4. Store Catalog (Pêssego Suave)
     ' ===============================================
-    package "Módulo: Store Catalog" as StoreCatalog {
+    package "Módulo: Store Catalog" as StoreCatalog #LightYellow {
 
         package "domain" as StoreCatalogDomain {
             class "product.entity.ts" as StoreCatalogProductEntity
@@ -186,7 +187,7 @@ package "Aplicação" {
     ' ===============================================
     ' 5. Payment (Azul Claro Suave)
     ' ===============================================
-    package "Módulo: Payment" as Payment {
+    package "Módulo: Payment" as Payment #LightCyan {
         
         package "domain" as PaymentDomain {
             class "transaction.ts" as PaymentTransaction
@@ -220,6 +221,53 @@ package "Aplicação" {
             PaymentFacadeImpl --> ProcessPaymentUseCase
         }
     }
+    
+    ' ===============================================
+    ' 6. Invoice (Ocre Suave) - NOVO MÓDULO
+    ' ===============================================
+    package "Módulo: Invoice" as Invoice #LightGoldenRodYellow {
+        
+        package "domain" as InvoiceDomain {
+            class "invoice.ts" as InvoiceEntity
+            class "item.ts" as InvoiceItemEntity
+            InvoiceEntity *-- "1..*" InvoiceItemEntity
+        }
+        
+        package "repository (Infra)" as InvoiceRepository {
+            class "invoice.model.ts" as InvoiceModel
+            class "invoice.repository.ts" as InvoiceRepositoryImpl
+            InvoiceRepositoryImpl - InvoiceModel
+        }
+        
+        package "usecase" as InvoiceUseCases {
+            class "GenerateInvoiceUseCase" as GenerateInvoiceUseCase << GenerateInv.usecase.ts >>
+            class "FindInvoiceUseCase" as FindInvoiceUseCase << FindInv.usecase.ts >>
+            
+            GenerateInvoiceUseCase .up.|> SharedUseCaseInterface
+            FindInvoiceUseCase .up.|> SharedUseCaseInterface
+            
+            GenerateInvoiceUseCase --> InvoiceRepository : persiste/busca
+            FindInvoiceUseCase --> InvoiceRepository : busca
+            
+            ' RASTREAMENTO DE ENTIDADE
+            InvoiceEntity ..> GenerateInvoiceUseCase : Criada
+            InvoiceEntity ..> FindInvoiceUseCase : Retornada
+            InvoiceEntity ..> InvoiceRepositoryImpl : Persistida/Lida
+        }
+
+        rectangle "Gateway (Abstração)" as InvoiceGateway {
+            interface "InvoiceGateway" as InvoiceGatewayInterface
+            InvoiceRepositoryImpl .down.|> InvoiceGatewayInterface : implementa
+        }
+        rectangle "Facade (Entrada)" as InvoiceFacadeComp {
+            interface "InvoiceFacadeInterface" as InvoiceFacadeInterface
+            class "InvoiceFacade" as InvoiceFacadeImpl
+            
+            InvoiceFacadeInterface <|-- InvoiceFacadeImpl
+            InvoiceFacadeImpl --> GenerateInvoiceUseCase
+            InvoiceFacadeImpl --> FindInvoiceUseCase
+        }
+    }
 
 
     ' ====================================================================================
@@ -235,5 +283,6 @@ package "Aplicação" {
     OrderOrchestrator --> ClientAdmFacadeInterface : 1. Busca/valida Cliente
     OrderOrchestrator --> ProductAdmFacadeInterface : 2. Reserva Estoque
     OrderOrchestrator --> PaymentFacadeInterface : 3. Processa Pagamento
+    OrderOrchestrator --> InvoiceFacadeInterface : 4. Gera Fatura (após pagamento)
 }
 @enduml
