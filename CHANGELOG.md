@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/danielso2007/fc-monolito-curso/compare/v1.2.0...v1.3.0) (2025-10-19)
+
+
+### Features
+
+* Adicionado o Invoice no projeto. ([1a38763](https://github.com/danielso2007/fc-monolito-curso/commit/1a38763f531a38c66d9cd82e2f2823cd098de8e1))
+
 ## [1.2.0](https://github.com/danielso2007/fc-monolito-curso/compare/v1.1.0...v1.2.0) (2025-10-18)
 
 
