@@ -1,11 +1,14 @@
 import Address from '../../@shared/domain/value-object/address';
 import Client from '../domain/client.entity';
 import ClientGateway from '../gateway/client.gateway';
+import { sequelize } from '../infrastructure/db';
 import { ClientModel } from './client.model';
 
 export default class ClientRepository implements ClientGateway {
 
   async add(entity: Client): Promise<void> {
+
+    await sequelize.sync();
 
     await ClientModel.create({
       id: entity.id,
@@ -24,6 +27,8 @@ export default class ClientRepository implements ClientGateway {
   }
 
   async find(id: string): Promise<Client> {
+
+    await sequelize.sync();
 
     const client = await ClientModel.findOne({ where: { id } });
 

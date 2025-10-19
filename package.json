@@ -6,6 +6,9 @@
   "scripts": {
     "test": "npm run tsc -- --noEmit && jest",
     "tsc": "tsc",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/server.js",
+    "dev": "ts-node src/server.ts",
     "release": "standard-version",
     "lint": "eslint 'src/**/*.ts' --ext .ts --no-ignore",
     "lint:fix": "eslint 'src/**/*.ts' --ext .ts --no-ignore --fix"
