@@ -6,7 +6,8 @@
   "scripts": {
     "test": "npm run tsc -- --noEmit && jest",
     "tsc": "tsc",
-    "build": "tsc",
+    "clean": "rimraf dist",
+    "build": "rimraf dist && tsc --diagnostics",
     "start": "node dist/server.js",
     "dev": "nodemon",
     "release": "standard-version",

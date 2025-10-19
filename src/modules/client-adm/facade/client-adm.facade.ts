@@ -20,6 +20,7 @@ export default class ClientAdmFacade implements ClientAdmFacadeInterface {
   constructor(usecaseProps: UseCaseProps) {
     this._findUsecase = usecaseProps.findUsecase;
     this._addUsecase = usecaseProps.addUsecase;
+    this._findAllUsecase = usecaseProps.findAllUsecase;
   }
 
   async add(input: AddClientFacadeInputDto): Promise<void> {
