@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/danielso2007/fc-monolito-curso/compare/v1.3.0...v1.4.0) (2025-10-20)
+
+
+### Features
+
+* Concuído o controller REST para Client. ([a645444](https://github.com/danielso2007/fc-monolito-curso/commit/a6454440f8f19fc90dd00817f51a0ea78a3dad8c))
+* Criado o checkout da aplicação (primeira mente simpes). ([b68800a](https://github.com/danielso2007/fc-monolito-curso/commit/b68800a9b43870d97ec572beb34c3eb28df71e81))
+* Criando o sequelize para cada módulo do projeto. ([8e94014](https://github.com/danielso2007/fc-monolito-curso/commit/8e94014f1a55783b33bf96d19710df1ad7963df1))
+* Genado faturas. ([2522b20](https://github.com/danielso2007/fc-monolito-curso/commit/2522b20976e41237e8c0069ce26fab19e01d1450))
+
 ## [1.3.0](https://github.com/danielso2007/fc-monolito-curso/compare/v1.2.0...v1.3.0) (2025-10-19)
 
 

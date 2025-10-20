@@ -1,6 +1,6 @@
 {
   "name": "fc-monolito-curso",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Projeto de estudo do curso de arquitetura.",
   "main": "dist/",
   "scripts": {
