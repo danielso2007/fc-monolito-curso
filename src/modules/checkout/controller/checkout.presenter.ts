@@ -3,7 +3,6 @@ import { CheckoutOutputDto } from "../facade/checkout.interface";
 
 export class CheckoutPresenter {
     static toJSON(input: CheckoutOutputDto): any {
-        console.log('Prese', input);
         if (!input) {
             return {};
         }
