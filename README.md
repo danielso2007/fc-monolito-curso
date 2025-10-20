@@ -13,6 +13,14 @@
 
 Para estudo.
 
+### Iniciando o projeto
+
+Para iniciar, execute `npm run build` e depois `npm run start`.
+
+### Carregando dados para testes
+
+Execute `carregar-dados.sh` para adicionar vários dados para testes.
+
 # Estrutura do projeto
 
 Obs.: Para gerar essa saĩda, foi usado o comando: `tree -I "node_modules|dist|.git"`
