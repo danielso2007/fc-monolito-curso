@@ -1,10 +1,10 @@
-import ClientRepository from 'modules/client-adm/repository/client.repository';
 import Address from '../../../@shared/domain/value-object/address';
+import ClientRepository from '../../repository/client.repository';
 import AddClientUseCase from './add-client.usecase';
 
 const MockRepository = (): ClientRepository => {
   return {
-
+    findAll: jest.fn(),
     add: jest.fn(),
     find: jest.fn()
   };

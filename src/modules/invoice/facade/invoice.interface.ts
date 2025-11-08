@@ -1,3 +1,6 @@
+import Address from "../../@shared/domain/value-object/address";
+import InvoiceItems from "../domain/invoice.itens.entity";
+
 export interface FindInvoiceInputDTO {
   id: string;
 }
@@ -57,7 +60,19 @@ export interface GenerateInvoiceOutputDto {
   total: number;
 }
 
+export interface FindAllInvoiceOutputDTO {
+  id: string;
+  name: string;
+  document: string;
+  address: Address;
+  items: InvoiceItems[];
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export default interface InvoiceFacadeInterface {
   find(input: FindInvoiceInputDTO): Promise<FindInvoiceOutputDTO>;
+  generate(input: GenerateInvoiceInputDto): Promise<GenerateInvoiceOutputDto>;
+  findAll(): Promise<FindAllInvoiceOutputDTO[]>;
 };
 

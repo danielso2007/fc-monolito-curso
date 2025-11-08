@@ -10,7 +10,7 @@ export interface ProductProps {
 
 export type ProductCreationAttributes = Omit<ProductProps, 'id'>;
 
-export default class Product extends BaseEntity implements AggregateRoot {
+export default class ProductStore extends BaseEntity implements AggregateRoot {
   private _name: string;
   private _description: string;
   private _salesPrice: number;

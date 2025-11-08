@@ -6,7 +6,6 @@ import { ClientModel } from './client.model';
 export default class ClientRepository implements ClientGateway {
 
   async add(entity: Client): Promise<void> {
-
     await ClientModel.create({
       id: entity.id,
       name: entity.name,
@@ -24,7 +23,6 @@ export default class ClientRepository implements ClientGateway {
   }
 
   async find(id: string): Promise<Client> {
-
     const client = await ClientModel.findOne({ where: { id } });
 
     if (!client) {
@@ -47,5 +45,26 @@ export default class ClientRepository implements ClientGateway {
       createdAt: client.createdAt,
       updatedAt: client.createdAt
     });
+  }
+
+  async findAll(): Promise<Client[]> {
+    const clientList = await ClientModel.findAll();
+
+    return clientList.map((client) => new Client({
+      id: client.id,
+      name: client.name,
+      email: client.email,
+      document: client.document,
+      address: new Address(
+        client.street,
+        client.number,
+        client.complement,
+        client.city,
+        client.state,
+        client.zipcode,
+      ),
+      createdAt: client.createdAt,
+      updatedAt: client.createdAt
+    }));
   }
 }

@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "incremental": true,
+    "incremental": false,
     "target": "ES2020",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "rootDir": "src",
+    "rootDir": "./src",
     "module": "commonjs",
     "outDir": "./dist",
     "esModuleInterop": true,
@@ -12,8 +12,22 @@
     "strict": true,
     "strictNullChecks": false,
     "skipLibCheck": true,
-    "baseUrl": "src"
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "lib": ["es2020"],
+    "baseUrl": ".",
+     "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*.ts",
+    "tests/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

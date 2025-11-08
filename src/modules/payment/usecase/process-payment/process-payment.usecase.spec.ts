@@ -1,5 +1,5 @@
-import TransactionRepostiory from 'modules/payment/repository/transaction.repository';
 import Transaction from '../../domain/transaction';
+import TransactionRepostiory from '../../repository/transaction.repository';
 import ProcessPaymentUseCase from './process-payment.usecase';
 
 const transaction = new Transaction({

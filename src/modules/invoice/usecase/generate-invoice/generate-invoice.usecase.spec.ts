@@ -7,7 +7,8 @@ const MockRepository = (): InvoiceGateway => {
   return {
     save: jest.fn(),
     find: jest.fn(),
-    findItens: jest.fn()
+    findItens: jest.fn(),
+    findAll: jest.fn()
   };
 };
 

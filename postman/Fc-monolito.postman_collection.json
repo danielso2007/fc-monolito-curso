@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "efc6164f-5369-4833-8542-9475a2004eae",
+		"name": "Fc-monolito",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1447676",
+		"_collection_link": "https://azul-financeiro-lote.postman.co/workspace/Curso-Arquitetura~a5b9114c-12ee-4f13-92d4-5814f6905c73/collection/1447676-efc6164f-5369-4833-8542-9475a2004eae?action=share&source=collection_link&creator=1447676"
+	},
+	"item": [
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Add Clients",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao.silva@example.com\",\n  \"document\": \"123.456.789-00\",\n  \"address\": {\n    \"street\": \"Rua das Flores\",\n    \"number\": \"123\",\n    \"complement\": \"Apto 45\",\n    \"city\": \"São Paulo\",\n    \"state\": \"SP\",\n    \"zipCode\": \"01234-567\"\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Clients",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Client",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/clients/08ac4df2-4e6d-4bc5-bbc8-61d3e04b49bf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"clients",
+								"08ac4df2-4e6d-4bc5-bbc8-61d3e04b49bf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoices",
+			"item": [
+				{
+					"name": "Find All Invoices",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/invoices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"invoices"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Checkout",
+			"item": [
+				{
+					"name": "Checkout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clientId\": \"73d4c9a1-5f2b-4e8c-a1d0-1b2c3d4e5f6a\",\n    \"paymentMethod\": \"credit_card\",\n    \"billingAddress\": {\n        \"street\": \"Rua das Flores\",\n        \"number\": \"860\",\n        \"complement\": \"Sala 27747\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"zipCode\": \"61581-889\"\n    },\n    \"shippingAddress\": {\n        \"street\": \"Avenida Brasil\",\n        \"number\": \"1500\",\n        \"complement\": \"\",\n        \"city\": \"São Paulo\",\n        \"state\": \"SP\",\n        \"zipCode\": \"61581-889\"\n    },\n    \"items\": [\n        {\n            \"productId\": \"c664f1d7-eb37-4bec-91c5-3ceb6837b356\",\n            \"productName\": \"Produto 39\",\n            \"price\": 208.99,\n            \"quantity\": 3\n        },\n        {\n            \"productId\": \"d0202e68-9f35-4a42-b220-df0b2f7db63d\",\n            \"productName\": \"Item 104\",\n            \"price\": 340.49,\n            \"quantity\": 1\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/checkout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

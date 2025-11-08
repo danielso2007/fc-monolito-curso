@@ -33,6 +33,7 @@ describe('Client Adm Facade test', () => {
     const facade = new ClientAdmFacade({
       addUsecase: addUsecase,
       findUsecase: undefined,
+      findAllUsecase: undefined
     });
 
     const input = {

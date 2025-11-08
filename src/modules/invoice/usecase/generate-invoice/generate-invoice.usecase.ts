@@ -15,7 +15,6 @@ export default class GenerateInvoiceUseCase implements UseCaseInterface {
     }
 
     async execute(input: GenerateInvoiceUseCaseInputDto): Promise<GenerateInvoiceUseCaseOutputDto> {
-
         const items = input.items.map((item) => new InvoiceItems(
             { id: item.id, name: item.name, price: item.price }
         ));

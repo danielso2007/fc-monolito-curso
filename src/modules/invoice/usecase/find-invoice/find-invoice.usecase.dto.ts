@@ -1,5 +1,5 @@
-import InvoiceItems from 'modules/invoice/domain/invoice.itens.entity';
 import Address from '../../../@shared/domain/value-object/address';
+import InvoiceItems from '../../domain/invoice.itens.entity';
 
 export interface FindInvoiceUseCaseInputDTO {
   id: string;

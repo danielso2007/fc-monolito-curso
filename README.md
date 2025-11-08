@@ -13,121 +13,220 @@
 
 Para estudo.
 
+### Iniciando o projeto
+
+Para iniciar, execute `npm run build` e depois `npm run start`.
+
+### Carregando dados para testes
+
+Execute `carregar-dados.sh` para adicionar vários dados para testes.
+
 # Estrutura do projeto
 
 Obs.: Para gerar essa saĩda, foi usado o comando: `tree -I "node_modules|dist|.git"`
 
 ```shell
+├── carregar-dados.sh
 ├── CHANGELOG.md
+├── eslint.config.mjs
 ├── jest.config.ts
+├── nodemon.json
 ├── package.json
 ├── package-lock.json
+├── plantUml
+│   ├── arquitetura-diagrama-altonivel.puml
+│   ├── arquitetura-diagrama-altonivel.svg
+│   ├── arquitetura-diagrama.puml
+│   └── arquitetura-diagrama.svg
+├── postman
+│   └── Fc-monolito.postman_collection.json
 ├── README.md
+├── seed_clients.sh
+├── seed_invoices.sh
 ├── src
-│   └── modules
-│       ├── client-adm
-│       │   ├── domain
-│       │   │   └── client.entity.ts
-│       │   ├── facade
-│       │   │   ├── client-adm.facade.interface.ts
-│       │   │   ├── client-adm.facade.spec.ts
-│       │   │   └── client-adm.facade.ts
-│       │   ├── factory
-│       │   │   └── client-adm.facade.factory.ts
-│       │   ├── gateway
-│       │   │   └── client.gateway.ts
-│       │   ├── repository
-│       │   │   ├── client.model.ts
-│       │   │   ├── client.repository.spec.ts
-│       │   │   └── client.repository.ts
-│       │   └── usecase
-│       │       ├── add-client
-│       │       │   ├── add-client.usecase.dto.ts
-│       │       │   ├── add-client.usecase.spec.ts
-│       │       │   └── add-client.usecase.ts
-│       │       └── find-client
-│       │           ├── find-client.usecase.dto.ts
-│       │           ├── find-client.usecase.spec.ts
-│       │           └── find-client.usecase.ts
-│       ├── payment
-│       │   ├── domain
-│       │   │   └── transaction.ts
-│       │   ├── facade
-│       │   │   ├── facade.interface.ts
-│       │   │   ├── payment.facade.spec.ts
-│       │   │   └── payment.facade.ts
-│       │   ├── factory
-│       │   │   └── payment.facade.factory.ts
-│       │   ├── gateway
-│       │   │   └── payment.gateway.ts
-│       │   ├── repository
-│       │   │   ├── transaction.model.ts
-│       │   │   ├── transaction.repository.spec.ts
-│       │   │   └── transaction.repository.ts
-│       │   └── usecase
-│       │       └── process-payment
-│       │           ├── process-payment.dto.ts
-│       │           ├── process-payment.usecase.spec.ts
-│       │           └── process-payment.usecase.ts
-│       ├── product-adm
-│       │   ├── domain
-│       │   │   └── product.entity.ts
-│       │   ├── facade
-│       │   │   ├── product-adm.facade.interface.ts
-│       │   │   ├── product-adm.facade.spec.ts
-│       │   │   └── product-adm.facade.ts
-│       │   ├── factory
-│       │   │   └── facade.factory.ts
-│       │   ├── gateway
-│       │   │   └── product.gateway.ts
-│       │   ├── repository
-│       │   │   ├── product.model.ts
-│       │   │   ├── product.repository.spec.ts
-│       │   │   └── product.repository.ts
-│       │   └── usecase
-│       │       ├── add-product
-│       │       │   ├── add-product.dto.ts
-│       │       │   ├── add-product.usecase.spec.ts
-│       │       │   └── add-product.usecase.ts
-│       │       └── check-stock
-│       │           ├── check-stock.dto.ts
-│       │           ├── check-stock.usecase.spec.ts
-│       │           └── check-stock.usecase.ts
-│       ├── @shared
-│       │   ├── domain
-│       │   │   ├── entity
-│       │   │   │   ├── aggregate-root.interface.ts
-│       │   │   │   └── base.entity.ts
-│       │   │   └── value-object
-│       │   │       ├── address.ts
-│       │   │       ├── id.value-object.ts
-│       │   │       └── value-object.interface.ts
-│       │   └── usecase
-│       │       └── use-case.interface.ts
-│       └── store-catalog
-│           ├── domain
-│           │   └── product.entity.ts
-│           ├── facade
-│           │   ├── store-catalog.facade.interface.ts
-│           │   ├── store-catalog.facade.spec.ts
-│           │   └── store-catalog.facade.ts
-│           ├── factory
-│           │   └── facade.factory.ts
-│           ├── gateway
-│           │   └── product.gateway.ts
-│           ├── repository
-│           │   ├── product.model.ts
-│           │   ├── product.repository.spec.ts
-│           │   └── product.repository.ts
-│           └── usecase
-│               ├── find-all-products
-│               │   ├── find-all-products.dto.ts
-│               │   ├── find-all-products.usecase.spec.ts
-│               │   └── find-all-products.usecase.ts
-│               └── find-product
-│                   ├── find-product.dto.ts
-│                   ├── find-product.usecase.spec.ts
-│                   └── find-product.usecase.ts
+│   ├── app.ts
+│   ├── infrastructure
+│   │   └── db.ts
+│   ├── middlewares
+│   │   └── errorHandler.ts
+│   ├── modules
+│   │   ├── checkout
+│   │   │   ├── controller
+│   │   │   │   ├── checkout.controller.ts
+│   │   │   │   └── checkout.presenter.ts
+│   │   │   ├── domain
+│   │   │   │   ├── order.entity.ts
+│   │   │   │   ├── order.item.entity.ts
+│   │   │   │   └── order.status.ts
+│   │   │   ├── facade
+│   │   │   │   ├── checkout.facade.spec.ts
+│   │   │   │   ├── checkout.facade.ts
+│   │   │   │   └── checkout.interface.ts
+│   │   │   ├── factory
+│   │   │   │   └── checkout.facade.factory.ts
+│   │   │   ├── gateway
+│   │   │   │   ├── order.gateway.ts
+│   │   │   │   └── order.item.gateway.ts
+│   │   │   ├── repository
+│   │   │   │   ├── order
+│   │   │   │   │   ├── order.model.ts
+│   │   │   │   │   ├── order.repository.spec.ts
+│   │   │   │   │   └── order.repository.ts
+│   │   │   │   └── orderItem
+│   │   │   │       ├── order.item.model.ts
+│   │   │   │       ├── order.item.repository.spec.ts
+│   │   │   │       └── order.item.repository.ts
+│   │   │   └── usecase
+│   │   │       └── checkout
+│   │   │           ├── checkout.usecase.dto.ts
+│   │   │           ├── checkout.usecase.spec.ts
+│   │   │           └── checkout.usercase.ts
+│   │   ├── client-adm
+│   │   │   ├── controller
+│   │   │   │   ├── client.controller.ts
+│   │   │   │   └── client.presenter.ts
+│   │   │   ├── domain
+│   │   │   │   └── client.entity.ts
+│   │   │   ├── facade
+│   │   │   │   ├── client-adm.facade.interface.ts
+│   │   │   │   ├── client-adm.facade.spec.ts
+│   │   │   │   └── client-adm.facade.ts
+│   │   │   ├── factory
+│   │   │   │   └── client-adm.facade.factory.ts
+│   │   │   ├── gateway
+│   │   │   │   └── client.gateway.ts
+│   │   │   ├── repository
+│   │   │   │   ├── client.model.ts
+│   │   │   │   ├── client.repository.spec.ts
+│   │   │   │   └── client.repository.ts
+│   │   │   └── usecase
+│   │   │       ├── add-client
+│   │   │       │   ├── add-client.usecase.dto.ts
+│   │   │       │   ├── add-client.usecase.spec.ts
+│   │   │       │   └── add-client.usecase.ts
+│   │   │       ├── find-all-client
+│   │   │       │   ├── find-all-client.usecase.dto.ts
+│   │   │       │   ├── find-all-client.usecase.spec.ts
+│   │   │       │   └── find-all-client.usecase.ts
+│   │   │       └── find-client
+│   │   │           ├── find-client.usecase.dto.ts
+│   │   │           ├── find-client.usecase.spec.ts
+│   │   │           └── find-client.usecase.ts
+│   │   ├── invoice
+│   │   │   ├── controller
+│   │   │   │   ├── invoice.controller.ts
+│   │   │   │   └── invoice.presenter.ts
+│   │   │   ├── domain
+│   │   │   │   ├── invoice.entity.ts
+│   │   │   │   └── invoice.itens.entity.ts
+│   │   │   ├── facade
+│   │   │   │   ├── invoice.facade.spec.ts
+│   │   │   │   ├── invoice.facade.ts
+│   │   │   │   └── invoice.interface.ts
+│   │   │   ├── factory
+│   │   │   │   └── invoice.facade.factory.ts
+│   │   │   ├── gateway
+│   │   │   │   └── invoice.gateway.ts
+│   │   │   ├── repository
+│   │   │   │   ├── invoice.itens.model.ts
+│   │   │   │   ├── invoice.model.ts
+│   │   │   │   ├── invoice.repository.spec.ts
+│   │   │   │   └── invoice.repository.ts
+│   │   │   └── usecase
+│   │   │       ├── find-all-invoice
+│   │   │       │   ├── find-all-invoice.usecase.dto.ts
+│   │   │       │   ├── find-all-invoice.usecase.spec.ts
+│   │   │       │   └── find-all-invoice.usecase.ts
+│   │   │       ├── find-invoice
+│   │   │       │   ├── find-invoice.usecase.dto.ts
+│   │   │       │   ├── find-invoice.usecase.spec.ts
+│   │   │       │   └── find-invoice.usecase.ts
+│   │   │       └── generate-invoice
+│   │   │           ├── generate-invoice.usecase.dto.ts
+│   │   │           ├── generate-invoice.usecase.spec.ts
+│   │   │           └── generate-invoice.usecase.ts
+│   │   ├── payment
+│   │   │   ├── domain
+│   │   │   │   └── transaction.ts
+│   │   │   ├── facade
+│   │   │   │   ├── facade.interface.ts
+│   │   │   │   ├── payment.facade.spec.ts
+│   │   │   │   └── payment.facade.ts
+│   │   │   ├── factory
+│   │   │   │   └── payment.facade.factory.ts
+│   │   │   ├── gateway
+│   │   │   │   └── payment.gateway.ts
+│   │   │   ├── repository
+│   │   │   │   ├── transaction.model.ts
+│   │   │   │   ├── transaction.repository.spec.ts
+│   │   │   │   └── transaction.repository.ts
+│   │   │   └── usecase
+│   │   │       └── process-payment
+│   │   │           ├── process-payment.dto.ts
+│   │   │           ├── process-payment.usecase.spec.ts
+│   │   │           └── process-payment.usecase.ts
+│   │   ├── product-adm
+│   │   │   ├── domain
+│   │   │   │   └── product.entity.ts
+│   │   │   ├── facade
+│   │   │   │   ├── product-adm.facade.interface.ts
+│   │   │   │   ├── product-adm.facade.spec.ts
+│   │   │   │   └── product-adm.facade.ts
+│   │   │   ├── factory
+│   │   │   │   └── facade.factory.ts
+│   │   │   ├── gateway
+│   │   │   │   └── product.gateway.ts
+│   │   │   ├── repository
+│   │   │   │   ├── product.model.ts
+│   │   │   │   ├── product.repository.spec.ts
+│   │   │   │   └── product.repository.ts
+│   │   │   └── usecase
+│   │   │       ├── add-product
+│   │   │       │   ├── add-product.dto.ts
+│   │   │       │   ├── add-product.usecase.spec.ts
+│   │   │       │   └── add-product.usecase.ts
+│   │   │       └── check-stock
+│   │   │           ├── check-stock.dto.ts
+│   │   │           ├── check-stock.usecase.spec.ts
+│   │   │           └── check-stock.usecase.ts
+│   │   ├── @shared
+│   │   │   ├── domain
+│   │   │   │   ├── entity
+│   │   │   │   │   ├── aggregate-root.interface.ts
+│   │   │   │   │   └── base.entity.ts
+│   │   │   │   └── value-object
+│   │   │   │       ├── address.ts
+│   │   │   │       ├── id.value-object.ts
+│   │   │   │       └── value-object.interface.ts
+│   │   │   └── usecase
+│   │   │       ├── use-case.interface.ts
+│   │   │       └── use-case.simple.execute.interface.ts
+│   │   └── store-catalog
+│   │       ├── domain
+│   │       │   └── product.entity.ts
+│   │       ├── facade
+│   │       │   ├── store-catalog.facade.interface.ts
+│   │       │   ├── store-catalog.facade.spec.ts
+│   │       │   └── store-catalog.facade.ts
+│   │       ├── factory
+│   │       │   └── facade.factory.ts
+│   │       ├── gateway
+│   │       │   └── product.gateway.ts
+│   │       ├── repository
+│   │       │   ├── product.repository.spec.ts
+│   │       │   ├── product.repository.ts
+│   │       │   └── product.store.model.ts
+│   │       └── usecase
+│   │           ├── find-all-products
+│   │           │   ├── find-all-products.dto.ts
+│   │           │   ├── find-all-products.usecase.spec.ts
+│   │           │   └── find-all-products.usecase.ts
+│   │           └── find-product
+│   │               ├── find-product.dto.ts
+│   │               ├── find-product.usecase.spec.ts
+│   │               └── find-product.usecase.ts
+│   └── server.ts
+├── tsconfig.eslint.json
 ├── tsconfig.json
 └── tslint.json
 ```

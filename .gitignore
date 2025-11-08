@@ -1,4 +1,7 @@
 .swc
 dist
 out/plantUml
+node_modules
 node_modules/
+.swc
+*.tsbuildinfo
