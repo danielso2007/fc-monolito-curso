@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/danielso2007/fc-monolito-curso/compare/v1.4.0...v1.4.1) (2025-11-08)
+
+
+### Bug Fixes
+
+* Resolvendo que o package-lock.json está fora de sincronia com o package.json. ([d85fb82](https://github.com/danielso2007/fc-monolito-curso/commit/d85fb82cd282f191805271a393c735990b3792cf))
+
 ## [1.4.0](https://github.com/danielso2007/fc-monolito-curso/compare/v1.3.0...v1.4.0) (2025-10-20)
 
 
